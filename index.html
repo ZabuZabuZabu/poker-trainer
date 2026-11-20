@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0d121b">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="ヨコサワ流">
+    <title>ヨコサワ流プリフロップトレーナー</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="brand" data-nav="home" role="button" tabindex="0">
+        <img src="icon.svg" alt="" width="28" height="28">
+        <span>ヨコサワ流<b>トレーナー</b></span>
+    </div>
+    <nav class="nav" aria-label="メインメニュー">
+        <button class="nav-btn" data-nav="home"><span class="nav-ico">⌂</span><span>ホーム</span></button>
+        <button class="nav-btn" data-nav="setup"><span class="nav-ico">▶</span><span>ドリル</span></button>
+        <button class="nav-btn" data-nav="ranges"><span class="nav-ico">▦</span><span>レンジ</span></button>
+        <button class="nav-btn" data-nav="stats"><span class="nav-ico">▤</span><span>成績</span></button>
+        <button class="nav-btn" data-nav="review"><span class="nav-ico">↻</span><span>復習</span><span class="nav-badge" id="nav-mistake-badge" hidden></span></button>
+    </nav>
+</header>
+
+<main id="app">
+    <!-- ホーム -->
+    <section class="view" id="view-home" hidden>
+        <div class="hero">
+            <div>
+                <h1>プリフロップの判断を、<br>反射で出せるまで。</h1>
+                <p class="muted">ヨコサワ流のハンドランクとポジションから、レイズ・コール・リレイズ・フォールドを素早く判断する練習アプリです。</p>
+            </div>
+            <button class="btn btn-primary btn-lg" data-action="quick-start">ドリルを始める <kbd>Enter</kbd></button>
+        </div>
+        <div class="tiles" id="home-tiles"></div>
+        <h2 class="section-title">クイックスタート</h2>
+        <div class="quick-grid" id="home-quick"></div>
+        <h2 class="section-title">苦手なスポット</h2>
+        <div id="home-weak"></div>
+    </section>
+
+    <!-- ドリル設定 -->
+    <section class="view" id="view-setup" hidden>
+        <h1 class="page-title">ドリル設定</h1>
+        <div class="card form" id="setup-form"></div>
+        <div class="setup-footer">
+            <p class="error" id="setup-error" hidden></p>
+            <button class="btn btn-primary btn-lg" data-action="start-drill">この設定で開始</button>
+        </div>
+    </section>
+
+    <!-- ドリル -->
+    <section class="view" id="view-drill" hidden>
+        <div class="drill-top">
+            <button class="btn btn-ghost btn-sm" data-action="quit-drill" title="終了 (Esc)">✕ 終了</button>
+            <div class="drill-progress">
+                <div class="drill-progress-text" id="drill-progress-text"></div>
+                <div class="bar"><div class="bar-fill" id="drill-progress-bar"></div></div>
+            </div>
+            <div class="drill-stats">
+                <div><span class="muted">正解率</span><b id="drill-acc">-</b></div>
+                <div><span class="muted">連続</span><b id="drill-streak">0</b></div>
+                <div><span class="muted">時間</span><b id="drill-timer">0.0s</b></div>
+            </div>
+        </div>
+        <div class="drill-body">
+            <div class="drill-main">
+                <div class="table-wrap"><div class="felt" id="drill-table"></div></div>
+                <div class="spot-line" id="drill-spot"></div>
+                <div class="actions" id="drill-actions"></div>
+            </div>
+            <aside class="drill-side card" id="drill-feedback"></aside>
+        </div>
+    </section>
+
+    <!-- ドリル結果 -->
+    <section class="view" id="view-summary" hidden>
+        <h1 class="page-title">ドリル結果</h1>
+        <div class="tiles" id="summary-tiles"></div>
+        <div class="row-actions" id="summary-actions"></div>
+        <div id="summary-mistakes"></div>
+    </section>
+
+    <!-- レンジ表 -->
+    <section class="view" id="view-ranges" hidden>
+        <h1 class="page-title">レンジ表</h1>
+        <div class="ranges-layout">
+            <div class="card">
+                <div id="range-controls"></div>
+                <div id="range-grid"></div>
+                <div id="range-legend"></div>
+            </div>
+            <aside class="card" id="range-detail"></aside>
+        </div>
+    </section>
+
+    <!-- 成績 -->
+    <section class="view" id="view-stats" hidden>
+        <h1 class="page-title">成績・分析</h1>
+        <div class="filter-row" id="stats-filter"></div>
+        <div id="stats-body"></div>
+    </section>
+
+    <!-- 復習 -->
+    <section class="view" id="view-review" hidden>
+        <h1 class="page-title">苦手スポットの復習</h1>
+        <div id="review-body"></div>
+    </section>
+</main>
+
+<div id="tooltip" role="tooltip" hidden></div>
+<div id="modal" class="modal" hidden></div>
+
+<script src="js/data.js"></script>
+<script src="js/engine.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
